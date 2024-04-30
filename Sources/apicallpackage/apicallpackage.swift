@@ -4,7 +4,7 @@ import Alamofire
 
 import Foundation
 import UIKit
-final class ConnectionHandler : NSObject {
+final public class ConnectionHandler : NSObject {
     static let shared = ConnectionHandler()
     private let alamofireManager : Session
     //var appDelegate = UIApplication.shared.delegate as! AppDelegate
