@@ -226,8 +226,8 @@ public protocol APIResponseProtocol{
 }
 
 
-typealias Closure<T> = (T)->()
-typealias JSON = [String: Any]
+public typealias Closure<T> = (T)->()
+public typealias JSON = [String: Any]
 
 extension JSONDecoder{
     func decode<T : Decodable>(_ model : T.Type,
@@ -252,18 +252,18 @@ public class APIResponseHandler : APIResponseProtocol{
     var dataSeq : Closure<Data>?
     var errorSeq : Closure<String>?
     
-    func responseDecode<T>(to modal: T.Type, _ result: @escaping Closure<T>) -> APIResponseProtocol where T : Decodable {
+    public  func responseDecode<T>(to modal: T.Type, _ result: @escaping Closure<T>) -> APIResponseProtocol where T : Decodable {
         
         let decoder = JSONDecoder()
         self.dataSeq =  decoder.decode(modal, result: result)
         return self
     }
     
-    func responseJSON(_ result: @escaping Closure<JSON>) -> APIResponseProtocol {
+    public func responseJSON(_ result: @escaping Closure<JSON>) -> APIResponseProtocol {
         self.jsonSeq = result
         return self
     }
-    func responseFailure(_ error: @escaping Closure<String>) {
+    public  func responseFailure(_ error: @escaping Closure<String>) {
         self.errorSeq = error
         
       }
