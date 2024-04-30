@@ -5,11 +5,11 @@ import Alamofire
 import Foundation
 import UIKit
 final public class ConnectionHandler : NSObject {
-    static let shared = ConnectionHandler()
-    private let alamofireManager : Session
+    static  public let shared = ConnectionHandler()
+    private  let alamofireManager : Session
     //var appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var preference = UserDefaults.standard
-    let strDeviceType = "1"
+    public var preference = UserDefaults.standard
+    public  let strDeviceType = "1"
    // let strDeviceToken = Utilities.sharedInstance.getDeviceToken()
   //  var support = UberSupport()
   //  var handler = LocalCacheHandler()
@@ -22,7 +22,7 @@ final public class ConnectionHandler : NSObject {
         alamofireManager = Session.init(configuration: configuration,
                                         serverTrustManager: .none)//Alamofire.SessionManager(configuration: configuration)
     }
-    func getRequest(for api : String,
+    public func getRequest(for api : String,
                     APIUrl : String,
                     params : Parameters) -> APIResponseProtocol{
        // if HTTPMethod.get == HTTPMethod.get {
@@ -35,7 +35,7 @@ final public class ConnectionHandler : NSObject {
         //}
     }
     
-    func networkChecker(with StartTime:Date,
+    public func networkChecker(with StartTime:Date,
                         EndTime: Date,
                         ContentData: Data?) {
         
@@ -72,7 +72,7 @@ final public class ConnectionHandler : NSObject {
         }
     }
     
-    func postRequest(forAPI api: String,APIUrl:String, params: JSON) -> APIResponseProtocol {
+    public func postRequest(forAPI api: String,APIUrl:String, params: JSON) -> APIResponseProtocol {
         let responseHandler = APIResponseHandler()
         var parameters = params
         let startTime = Date()
@@ -132,7 +132,7 @@ final public class ConnectionHandler : NSObject {
         return responseHandler
     }
    
-    func getRequest(forAPI api: String,
+    public  func getRequest(forAPI api: String,
                     params: JSON,
                     APIUrl: String
                     ) -> APIResponseProtocol {
@@ -218,7 +218,7 @@ final public class ConnectionHandler : NSObject {
 
 
 
-protocol APIResponseProtocol{
+public protocol APIResponseProtocol{
     func responseDecode<T: Decodable>(to modal : T.Type,
                               _ result : @escaping Closure<T>) -> APIResponseProtocol
     func responseJSON(_ result : @escaping Closure<JSON>) -> APIResponseProtocol
@@ -244,7 +244,7 @@ extension JSONDecoder{
     }
 }
 
-class APIResponseHandler : APIResponseProtocol{
+public class APIResponseHandler : APIResponseProtocol{
   
     init(){
     }
